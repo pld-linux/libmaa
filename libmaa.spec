@@ -1,32 +1,34 @@
 Summary:	Low-level data structures which are helpful for writing compilers
 Summary(pl.UTF-8):	Struktury niskiego poziomu pomocne do tworzenia kompilatorów
 Name:		libmaa
-Version:	1.1.0
+Version:	1.2.0
 Release:	1
-License:	LGPL
+License:	LGPL v2+
 Group:		Libraries
-Source0:	http://dl.sourceforge.net/dict/%{name}-%{version}.tar.gz
-# Source0-md5:	d1883d09f65179a3b6aa16579cb5a7e9
-URL:		http://sourceforge.net/projects/dict
+Source0:	http://downloads.sourceforge.net/dict/%{name}-%{version}.tar.gz
+# Source0-md5:	7e5eefc9929d75f019d3854d94c35928
+URL:		http://sourceforge.net/projects/dict/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 The libmaa library provides many low-level data structures which are
 helpful for writing compilers, including hash tables, sets, lists,
 debugging support, and memory management. Although libmaa was designed
-and implemented as a foundation for the kheperalong, the data
-structures are generally applicable to a wide range of programming
-problems.
-
-The memory management routines are especially helpful for improving
-the performance of memory-intensive applications.
-
+and implemented as a foundation for the Khepera Transformation System,
+the data structures are generally applicable to a wide range of
+programming problems. The memory management routines are especially
+helpful for improving the performance of memory-intensive
+applications.
 
 %description -l pl.UTF-8
 Biblioteka libmaa udostępnia wiele struktur niskiego poziomu
 pomocnych do tworzenia kompilatorów, włączając w to tablice
 mieszające, zestawy, listy, wspomaganie odpluskwiania oraz
-zarządzania pamięcią.
+zarządzania pamięcią. Pierwotnie libmaa powstała jako podstawa dla
+systemu przekształceń Khepera, ale struktury danych mają zastosowanie
+przy wielu zagadnieniach programistycznych. Funkcje zarządzające
+pamięcią są przydatne szczególnie przy poprawianiu wydajności
+aplikacji intensywnie korzystających z pamięci.
 
 %package devel
 Summary:	Header files for libmaa library
@@ -73,15 +75,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog README
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
+%doc ChangeLog NEWS README
+%attr(755,root,root) %{_libdir}/libmaa.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libmaa.so.2
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
+%attr(755,root,root) %{_libdir}/libmaa.so
+%{_libdir}/libmaa.la
 %{_includedir}/maa.h
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libmaa.a
