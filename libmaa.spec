@@ -2,7 +2,7 @@ Summary:	Low-level data structures which are helpful for writing compilers
 Summary(pl.UTF-8):	Struktury niskiego poziomu pomocne do tworzenia kompilatorów
 Name:		libmaa
 Version:	1.3.2
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/dict/%{name}-%{version}.tar.gz
