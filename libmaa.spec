@@ -1,13 +1,14 @@
 Summary:	Low-level data structures which are helpful for writing compilers
 Summary(pl.UTF-8):	Struktury niskiego poziomu pomocne do tworzenia kompilatorów
 Name:		libmaa
-Version:	1.3.2
-Release:	2
+Version:	1.5.1
+Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://downloads.sourceforge.net/dict/%{name}-%{version}.tar.gz
-# Source0-md5:	01dab2cde2e0a322653e45bfa63537ee
-URL:		http://sourceforge.net/projects/dict/
+Source0:	https://downloads.sourceforge.net/dict/%{name}-%{version}.tar.gz
+# Source0-md5:	9ebbdc4e9bf5ad02fc924f011a389433
+URL:		https://sourceforge.net/projects/dict/
+BuildRequires:	mk-configure
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -58,14 +59,23 @@ Statyczna biblioteka libmaa.
 %setup -q
 
 %build
-%configure
-%{__make}
+export PREFIX=%{_prefix}
+export LIBDIR=%{_libdir}
+export CC="%{__cc}"
+export CFLAGS="%{rpmcflags}"
+export CPPFLAGS="%{rpmcppflags}"
+mkcmake \
+	COPTS=" "
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
+export PREFIX=%{_prefix}
+export LIBDIR=%{_libdir}
+mkcmake install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+chmod 755 $RPM_BUILD_ROOT%{_libdir}/lib*.so*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -75,14 +85,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog NEWS README
-%attr(755,root,root) %{_libdir}/libmaa.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libmaa.so.3
+%doc README doc/{LICENSE,NEWS,TODO}
+%attr(755,root,root) %{_libdir}/libmaa.so.*.*
+%ghost %{_libdir}/libmaa.so.4
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libmaa.so
-%{_libdir}/libmaa.la
+%{_libdir}/libmaa.so
 %{_includedir}/maa.h
 
 %files static
